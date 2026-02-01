@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
 const navItems = [
@@ -11,7 +12,7 @@ const navItems = [
   { label: "1953–1964", href: "#period-1953" },
   { label: "1964–1982", href: "#period-1964" },
   { label: "1985–1991", href: "#period-1985" },
-  { label: "Команда", href: "#team" },
+  { label: "Капсула времени", href: "#capsule" },
 ];
 
 export function Navigation() {
@@ -32,47 +33,49 @@ export function Navigation() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: "easeOut" }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          isScrolled ? "glass py-4" : "py-6"
-        }`}
+        className="fixed top-0 left-0 right-0 z-50 flex justify-center items-center pt-4 px-4 gap-3"
       >
-        <div className="container mx-auto px-6">
-          <div className="flex items-center justify-between">
+        {/* Кружок с иконкой — отдельно */}
+        <a
+          href="#"
+          className="flex shrink-0 items-center justify-center rounded-full overflow-hidden border border-border bg-background/60 hover:bg-muted/50 transition-colors"
+          aria-label="Код Времени"
+        >
+          <Image
+            src="/images/icon.png"
+            alt=""
+            width={60}
+            height={60}
+            className="rounded-full object-cover"
+          />
+        </a>
+
+        {/* Капсула с пунктами — отдельно, не соединена с кружком */}
+        <nav className="hidden lg:flex items-center rounded-full bg-muted/50 border border-border px-4 py-2 gap-1">
+          {navItems.map((item) => (
             <a
-              href="#"
-              className="text-xl font-bold tracking-tight hover:text-primary transition-colors"
+              key={item.href}
+              href={item.href}
+              className="px-3 py-2 text-sm text-muted-foreground hover:text-foreground rounded-full hover:bg-background/60 transition-colors duration-300"
             >
-              КОД ВРЕМЕНИ
+              {item.label}
             </a>
+          ))}
+        </nav>
 
-            {/* Desktop Navigation */}
-            <nav className="hidden lg:flex items-center gap-8">
-              {navItems.map((item) => (
-                <a
-                  key={item.href}
-                  href={item.href}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors duration-300"
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
-
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="lg:hidden"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </Button>
-          </div>
-        </div>
+        {/* Кнопка мобильного меню */}
+        <Button
+          variant="ghost"
+          size="icon"
+          className="lg:hidden shrink-0 rounded-full"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+        >
+          {isMobileMenuOpen ? (
+            <X className="w-5 h-5" />
+          ) : (
+            <Menu className="w-5 h-5" />
+          )}
+        </Button>
       </motion.header>
 
       {/* Mobile Menu */}

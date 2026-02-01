@@ -14,21 +14,8 @@ export const metadata: Metadata = {
   description: 'Цифровой фестиваль-архив советской культуры второй половины XX века. Погрузитесь в эпоху через музыку, литературу, живопись и кинематограф.',
   keywords: ['советская культура', 'СССР', 'история', 'фестиваль', 'музей', '1945-1991'],
   icons: {
-    icon: [
-      {
-        url: '/icon-light-32x32.png',
-        media: '(prefers-color-scheme: light)',
-      },
-      {
-        url: '/icon-dark-32x32.png',
-        media: '(prefers-color-scheme: dark)',
-      },
-      {
-        url: '/icon.svg',
-        type: 'image/svg+xml',
-      },
-    ],
-    apple: '/apple-icon.png',
+    icon: '/images/icon.png',
+    apple: '/images/icon.png',
   },
 }
 
