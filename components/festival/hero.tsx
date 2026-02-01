@@ -76,7 +76,7 @@ export function Hero() {
           <Button
             onClick={scrollToContent}
             size="lg"
-            className="glass border-primary/30 hover:bg-primary/20 hover:border-primary/50 transition-all duration-500 text-foreground px-8 py-6 text-lg glow"
+            className="glass border-primary/30 hover:bg-primary/20 hover:border-primary/50 transition-all duration-500 text-foreground px-8 py-6 text-lg glow hover:scale-105"
           >
             Погрузиться в эпоху
           </Button>

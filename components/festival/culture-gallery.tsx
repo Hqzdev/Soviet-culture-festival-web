@@ -10,16 +10,22 @@ const galleryItems = [
     image: "/images/music-soviet.jpg",
     title: "Музыка эпохи",
     description: "От победных маршей до рок-н-ролла",
+    spravka:
+      "Советская музыка — от симфоний Шостаковича и Прокофьева до бардовской песни и «Магнитиздата». Эстрада, рок-группы и фестивали переплетались с цензурой и официальной культурой, формируя звуковой ландшафт эпохи.",
   },
   {
     image: "/images/cinema-soviet.jpg",
     title: "Кинематограф",
     description: "Золотой век советского кино",
+    spravka:
+      "Мосфильм, Ленфильм и студии республик выпускали фильмы, которые становились событиями. Тарковский, Рязанов, Данелия, Михалков — режиссёры, чьи картины до сих пор входят в мировой киноканон и в быт советских зрителей.",
   },
   {
     image: "/images/literature-soviet.jpg",
     title: "Литература",
     description: "Слово как оружие и спасение",
+    spravka:
+      "«Толстые» журналы, самиздат и цензура задавали контекст. Солженицын, Бродский, Ахмадулина, Высоцкий — голоса, которые читали и переписывали от руки. Литература была и способом выживания, и формой сопротивления.",
   },
 ];
 
@@ -64,12 +70,21 @@ export function CultureGallery() {
                   fill
                   className="object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <div className="glass rounded-2xl p-6 transform translate-y-4 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
+                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/10 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 transition-opacity duration-300 group-hover:opacity-0">
+                  <div className="glass rounded-2xl p-6">
                     <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
                     <p className="text-muted-foreground text-sm">
                       {item.description}
+                    </p>
+                  </div>
+                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-background/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute inset-0 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <div className="glass rounded-2xl p-6">
+                    <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      {item.spravka}
                     </p>
                   </div>
                 </div>
