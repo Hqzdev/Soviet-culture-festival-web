@@ -4,27 +4,13 @@ import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef, useState } from "react";
 import Image from "next/image";
-import { Music, BookOpen, Palette, Film, Radio, Play, BookMarked, Gamepad2 } from "lucide-react";
+import { Music, BookOpen, Palette, Film } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 
 interface CultureBlock {
   type: "music" | "literature" | "painting" | "cinema";
   title: string;
   content: string;
-}
-
-interface Interactive {
-  title: string;
-  description: string;
-  icon: "radio" | "cinema" | "library" | "game";
 }
 
 interface PeriodData {
@@ -34,7 +20,7 @@ interface PeriodData {
   subtitle: string;
   image: string;
   culture: CultureBlock[];
-  interactives: Interactive[];
+  interactives?: { title: string; description: string; icon: string }[];
 }
 
 const iconMap = {
@@ -42,9 +28,6 @@ const iconMap = {
   literature: BookOpen,
   painting: Palette,
   cinema: Film,
-  radio: Radio,
-  library: BookMarked,
-  game: Gamepad2,
 };
 
 export function PeriodSection({ period }: { period: PeriodData }) {
@@ -55,21 +38,6 @@ export function PeriodSection({ period }: { period: PeriodData }) {
   const getIcon = (type: string) => {
     const Icon = iconMap[type as keyof typeof iconMap] || Music;
     return <Icon className="w-5 h-5" />;
-  };
-
-  const getInteractiveIcon = (iconType: string) => {
-    switch (iconType) {
-      case "radio":
-        return <Radio className="w-6 h-6" />;
-      case "cinema":
-        return <Play className="w-6 h-6" />;
-      case "library":
-        return <BookMarked className="w-6 h-6" />;
-      case "game":
-        return <Gamepad2 className="w-6 h-6" />;
-      default:
-        return <Radio className="w-6 h-6" />;
-    }
   };
 
   return (
@@ -151,59 +119,6 @@ export function PeriodSection({ period }: { period: PeriodData }) {
               ))}
           </motion.div>
 
-          {/* Interactives */}
-          <div>
-            <h3 className="text-2xl font-semibold mb-8">Интерактивы</h3>
-            <div className="grid md:grid-cols-2 gap-6">
-              {period.interactives.map((interactive, index) => (
-                <Dialog key={index}>
-                  <DialogTrigger asChild>
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={isInView ? { opacity: 1, y: 0 } : {}}
-                      transition={{ duration: 0.5, delay: index * 0.1 }}
-                      className="glass rounded-2xl p-6 cursor-pointer hover:bg-secondary/50 transition-all duration-300 group"
-                    >
-                      <div className="flex items-start gap-4">
-                        <div className="p-3 rounded-xl bg-primary/20 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-                          {getInteractiveIcon(interactive.icon)}
-                        </div>
-                        <div>
-                          <h4 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">
-                            {interactive.title}
-                          </h4>
-                          <p className="text-muted-foreground text-sm">
-                            {interactive.description}
-                          </p>
-                        </div>
-                      </div>
-                    </motion.div>
-                  </DialogTrigger>
-                  <DialogContent className="glass border-border/50 max-w-lg">
-                    <DialogHeader>
-                      <DialogTitle className="flex items-center gap-3 text-xl">
-                        <div className="p-2 rounded-lg bg-primary/20 text-primary">
-                          {getInteractiveIcon(interactive.icon)}
-                        </div>
-                        {interactive.title}
-                      </DialogTitle>
-                      <DialogDescription className="text-base pt-4">
-                        {interactive.description}
-                      </DialogDescription>
-                    </DialogHeader>
-                    <div className="mt-6 p-8 rounded-xl bg-secondary/50 text-center">
-                      <p className="text-muted-foreground">
-                        Интерактивный элемент загружается...
-                      </p>
-                      <div className="mt-4 flex justify-center">
-                        <div className="w-8 h-8 border-2 border-primary border-t-transparent rounded-full animate-spin" />
-                      </div>
-                    </div>
-                  </DialogContent>
-                </Dialog>
-              ))}
-            </div>
-          </div>
         </motion.div>
       </div>
     </section>
